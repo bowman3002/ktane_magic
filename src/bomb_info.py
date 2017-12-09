@@ -10,6 +10,7 @@ class BombInfo:
         self.indicators = []
         self.batteries = 0
         self.ports = set()
+        self.serial_number = ""
 
     def read_data(self):
         """
@@ -21,6 +22,8 @@ class BombInfo:
         self.batteries = self.read_batteries()
         self.print_divider()
         self.ports = self.read_ports()
+        self.print_divider()
+        self.serial_number = self.read_serial_number()
         self.print_divider()
 
     def print_divider(self):
@@ -84,3 +87,6 @@ class BombInfo:
                 print("Not an integer")
 
         return current_ports
+
+    def read_serial_number(self):
+        return input("Enter the serial number for the bomb: ").lower()
