@@ -1,5 +1,6 @@
 from indicator import Indicator
 from format_error import FormatError
+from port import PortEnum
 
 class BombInfo:
     """
@@ -8,13 +9,22 @@ class BombInfo:
     def __init__(self):
         self.indicators = []
         self.batteries = 0
+        self.ports = set()
 
     def read_data(self):
         """
         Reads in all data from the bomb itself
         """
+        self.print_divider()
         self.indicators = self.read_indicators()
+        self.print_divider()
         self.batteries = self.read_batteries()
+        self.print_divider()
+        self.ports = self.read_ports()
+        self.print_divider()
+
+    def print_divider(self):
+        print("\n--------------------------------------------------------------------------------\n")
 
     def read_indicators(self):
         """
@@ -47,3 +57,30 @@ class BombInfo:
                 return int(num_batteries)
             except ValueError:
                 print("Not a number!")
+
+    def read_ports(self):
+        """
+        Shows user numbered list of ports
+        Prompts user to enter matching numbers to what ports are on the bomb
+        """
+        port_list = list(PortEnum)
+        current_ports = set()
+        for i in range(0, len(port_list)):
+            print("{0}: {1}".format(i, port_list[i].value))
+
+        while True:
+            value_str = input("Enter number matching a port on the bomb or blank for end: ")
+
+            if value_str == "":
+                break
+
+            try:
+                value = int(value_str)
+                if value > len(port_list):
+                    print("Number out of range")
+                    continue
+                current_ports.add(port_list[value])
+            except ValueError:
+                print("Not an integer")
+
+        return current_ports
