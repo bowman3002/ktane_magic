@@ -13,9 +13,9 @@ class game_loop:
         self.name = name
 
     def __enter__(self):
-        print("==============================")
+        print("================================================================================")
         print(self.name.upper())
-        print("==============================")
+        print("================================================================================")
 
     def __exit__(self, type, value, traceback):
         if isinstance(value, EscapeException):
