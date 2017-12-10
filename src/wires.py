@@ -1,4 +1,3 @@
-from game_input import EscapeException
 from game_input import game_input
 from game_input import game_loop
 from format_error import FormatError
@@ -20,7 +19,7 @@ class Wires:
             while True:
                 wires = game_input("Please enter character for each wire color, top to bottom, no spaces: ").lower()
                 try:
-                    if set("bkrwy") < set(wires):
+                    if not (set("bkrwy") >= set(wires)):
                         raise FormatError(wires)
 
                     self.function_dict[len(wires)](self, wires, bomb_info)

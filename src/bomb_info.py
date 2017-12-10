@@ -17,13 +17,13 @@ class BombInfo:
         Reads in all data from the bomb itself
         """
         self.print_divider()
-        self.indicators = self.read_indicators()
+        self.serial_number = self.read_serial_number()
         self.print_divider()
         self.batteries = self.read_batteries()
         self.print_divider()
         self.ports = self.read_ports()
         self.print_divider()
-        self.serial_number = self.read_serial_number()
+        self.indicators = self.read_indicators()
         self.print_divider()
 
     def print_divider(self):
@@ -90,3 +90,10 @@ class BombInfo:
 
     def read_serial_number(self):
         return input("Enter the serial number for the bomb: ").lower()
+
+    def exists_indicator(self, ind_string):
+        """
+        Raises FormatError if ind_string is not formatted correctly
+        """
+        ind = Indicator.Make_Indicator(ind_string)
+        return len(filter(lambda i: i.light == ind.light and i.text == ind.text, self.indicators)) > 0
