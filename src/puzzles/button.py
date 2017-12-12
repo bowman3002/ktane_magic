@@ -5,7 +5,7 @@ from puzzle import puzzle
 @puzzle("Button")
 class Button:
     def __init__(self):
-        self.name
+        self.name = "Button"
 
     def run(self, bomb_info):
         with game_loop(self.name) as loop:
@@ -25,7 +25,7 @@ class Button:
                     self.holdButton()
                 elif bomb_info.batteries > 2 and bomb_info.exists_indicator("tfrk"):
                     print("Click the button")
-                elif color = 'y':
+                elif color == 'y':
                     self.holdButton()
                 elif color == 'r' and text == "hold":
                     print("Click the button")

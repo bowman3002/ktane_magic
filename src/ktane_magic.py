@@ -3,9 +3,7 @@ from bomb_info import BombInfo
 from game_input import game_input
 from game_input import game_loop
 
-#Games
-import wires
-import button
+from puzzles import *
 
 class Driver:
     def __init__(self):
@@ -33,6 +31,9 @@ class Driver:
         print("Puzzle List:")
         for key in self.puzzle_dict:
             print("    {}".format(key))
+
+    def import_game(self, key):
+        import_module(key.lower())
 
 def main():
     driver = Driver()
