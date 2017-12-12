@@ -99,5 +99,8 @@ class BombInfo:
         ind = Indicator.Make_Indicator(ind_string)
         return len(filter(lambda i: i.light == ind.light and i.text == ind.text, self.indicators)) > 0
 
+    def serial_has_vowel(self):
+        return any(char in {"a", "e", "i", "o", "u"} for char in self.serial_number)
+
     def add_strike(self):
         self.strikes += 1

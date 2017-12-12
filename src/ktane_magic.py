@@ -24,7 +24,8 @@ class Driver:
                 elif command in self.puzzle_dict:
                     self.puzzle_dict[command].run(self.bomb_info)
                 elif command == "X":
-                    bomb_info.add_strike()
+                    print("Strike added")
+                    self.bomb_info.add_strike()
                 else:
                     print("Unknown puzzle")
                     self.print_puzzles()
