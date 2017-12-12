@@ -11,7 +11,7 @@ class WhosOnFirst:
                      "says": "Bottom Right",
                      "nothing": "Middle Left",
                      "": "Bottom Left",
-                     "blank", "Middle Right",
+                     "blank": "Middle Right",
                      "no": "Bottom Right",
                      "led": "Middle Left",
                      "lead": "Bottom Right",
@@ -49,6 +49,7 @@ class WhosOnFirst:
                  "press": ["Right", "Middle", "Yes", "Ready", "Press"],
                  "you": ["Sure", "You Are", "Your", "You're", "Next", "Uh Huh", "UR", "Hold", "What?", "You"],
                  "you are": ["Your", "Next", "Like", "Uh Huh", "What?", "Done", "Uh Uh", "Hold", "You", "U", "You're", "Sure", "UR", "You Are"],
+                 "your": ["Uh Uh", "You Are", "Uh Huh", "Your"],
                  "you're": ["You", "You're"],
                  "ur": ["Done", "U", "UR"],
                  "u": ["Uh Huh", "Sure", "Next", "What?", "You're", "UR", "Uh Uh", "Done", "U"],
@@ -56,7 +57,7 @@ class WhosOnFirst:
                  "uh uh": ["UR", "U", "You Are", "You're", "Next", "Uh Uh"],
                  "what?": ["You", "Hold", "You're", "Your", "U", "Done", "Uh Uh", "Like", "You Are", "Uh Huh", "UR", "Next", "What?"],
                  "done": ["Sure", "Uh Huh", "Next", "What?", "Your", "UR", "You're", "Hold", "Like", "You", "U", "You Are", "Uh Uh", "Done"],
-                 "next": ["What?". "Uh Huh", "Uh Uh", "Your", "Hold", "Sure", "Next"],
+                 "next": ["What?", "Uh Huh", "Uh Uh", "Your", "Hold", "Sure", "Next"],
                  "hold": ["You Are", "U", "Done", "Uh Uh", "You", "UR", "Sure", "What?", "You're", "Next", "Hold"],
                  "sure": ["You Are", "Done", "Like", "You're", "You", "Hold", "Uh Huh", "UR", "Sure"],
                  "like": ["You're", "Next", "U", "UR", "Hold", "Done", "Uh Uh", "What?", "Uh Huh", "You", "Like"]}
@@ -65,3 +66,26 @@ class WhosOnFirst:
         self.name = "Who's On First"
 
     def run(self, bomb_info):
+        with game_loop(self.name) as loop:
+            while True:
+                display_text = game_input("Enter the text shown on the display: ").lower()
+
+                if not display_text in WhosOnFirst.position_dict:
+                    print("Display text not recognized")
+                    continue
+
+                button_text = game_input("Enter text on the {} button: ".format(WhosOnFirst.position_dict[display_text])).lower()
+
+                print("Press enter for next word, enter text to exit")
+                completed = False
+                for word in WhosOnFirst.word_dict[button_text]:
+                    print(word, end='')
+                    command = game_input("")
+                    if command != "":
+                        completed = True
+                        break
+
+                if not completed:
+                    print("No matching word found, please try again")
+                else:
+                    break
