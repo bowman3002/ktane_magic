@@ -18,11 +18,13 @@ class Driver:
 
         with game_loop("KEEP TALKING AND NOBODY EXPLODES") as loop:
             while True:
-                command = game_input("Enter name of the puzzle, 'help' to list puzzles, or ~ to return: ")
+                command = game_input("Enter name of the puzzle, X for a strike, 'help' to list puzzles, or ~ to return: ")
                 if command == "help":
                     self.print_puzzles()
                 elif command in self.puzzle_dict:
                     self.puzzle_dict[command].run(self.bomb_info)
+                elif command == "X":
+                    bomb_info.add_strike()
                 else:
                     print("Unknown puzzle")
                     self.print_puzzles()

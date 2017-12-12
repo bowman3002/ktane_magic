@@ -11,6 +11,7 @@ class BombInfo:
         self.batteries = 0
         self.ports = set()
         self.serial_number = ""
+        self.strikes = 0
 
     def read_data(self):
         """
@@ -97,3 +98,6 @@ class BombInfo:
         """
         ind = Indicator.Make_Indicator(ind_string)
         return len(filter(lambda i: i.light == ind.light and i.text == ind.text, self.indicators)) > 0
+
+    def add_strike(self):
+        self.strikes += 1
